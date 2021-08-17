@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Calorie Counter</string>
+    <string name="welcome">Welcome</string>
+    <string name="welcome_message">We\'ve got just couple of questions. Please fill the form on the next page to calculate your BMR.</string>
+    <string name="calculate_bmr">Calculate BMR</string>
 </resources>
