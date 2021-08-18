@@ -36,4 +36,6 @@
         <item>I want to keep weight</item>
         <item>I want to gain weight</item>
     </array>
+    <string name="item_required">Required</string>
+    <string name="kcal">kcal</string>
 </resources>

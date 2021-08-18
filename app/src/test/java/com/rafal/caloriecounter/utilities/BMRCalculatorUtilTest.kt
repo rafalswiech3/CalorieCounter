@@ -78,400 +78,95 @@ class BMRCalculatorUtilTest {
         assertThat(result).isTrue()
     }
 
-    // region female tests
     @Test
-    fun `calculate bmr female, little exercise, loose weight`() {
+    fun `female BMR returns correct value`() {
         val result = BMRCalculatorUtil.calculateBMR(
             gender = 2,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 1,
-            goal = 1
+            weight = 50.0f,
+            height = 150.0f,
+            age = 25
+        )
+        assertThat(result).isEqualTo(1153)
+    }
+
+    @Test
+    fun `male BMR returns correct value`() {
+        val result = BMRCalculatorUtil.calculateBMR(
+            gender = 1,
+            weight = 50.0f,
+            height = 150.0f,
+            age = 25
         )
         assertThat(result).isEqualTo(1319)
     }
 
     @Test
-    fun `calculate bmr female, little exercise, keep weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 2,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 1,
-            goal = 2
-        )
-        assertThat(result).isEqualTo(1619)
+    fun `eat no exercise returns correct value`() {
+        val result = BMRCalculatorUtil.calculateEAT(1500.0, 1)
+        assertThat(result).isEqualTo(1800)
     }
 
     @Test
-    fun `calculate bmr female, little exercise, gain weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 2,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 1,
-            goal = 3
-        )
-        assertThat(result).isEqualTo(1919)
+    fun `eat light exercise returns correct value`() {
+        val result = BMRCalculatorUtil.calculateEAT(1500.0, 2)
+        assertThat(result).isEqualTo(2062.5)
     }
 
     @Test
-    fun `calculate bmr female, light exercise, loose weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 2,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 2,
-            goal = 1
-        )
-        assertThat(result).isEqualTo(1444)
+    fun `eat moderate exercise returns correct value`() {
+        val result = BMRCalculatorUtil.calculateEAT(1500.0, 3)
+        assertThat(result).isEqualTo(2325)
     }
 
     @Test
-    fun `calculate bmr female, light exercise, keep weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 2,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 2,
-            goal = 2
-        )
-        assertThat(result).isEqualTo(1744)
+    fun `eat very active returns correct value`() {
+        val result = BMRCalculatorUtil.calculateEAT(1500.0, 4)
+        assertThat(result).isEqualTo(2587.5)
     }
 
     @Test
-    fun `calculate bmr female, light exercise, gain weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 2,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 2,
-            goal = 3
-        )
-        assertThat(result).isEqualTo(2044)
+    fun `eat extra active returns correct value`() {
+        val result = BMRCalculatorUtil.calculateEAT(1500.0, 5)
+        assertThat(result).isEqualTo(2850)
     }
 
     @Test
-    fun `calculate bmr female, moderate exercise, loose weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 2,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 3,
-            goal = 1
-        )
-        assertThat(result).isEqualTo(1568)
-    }
-
-    @Test
-    fun `calculate bmr female, moderate exercise, keep weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 2,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 3,
-            goal = 2
-        )
-        assertThat(result).isEqualTo(1868)
-    }
-
-    @Test
-    fun `calculate bmr female, moderate exercise, gain weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 2,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 3,
-            goal = 3
-        )
-        assertThat(result).isEqualTo(2168)
-    }
-
-    @Test
-    fun `calculate bmr female, very active, loose weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 2,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 4,
-            goal = 1
-        )
-        assertThat(result).isEqualTo(1693)
-    }
-
-    @Test
-    fun `calculate bmr female, very active, keep weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 2,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 4,
-            goal = 2
-        )
-        assertThat(result).isEqualTo(1993)
-    }
-
-    @Test
-    fun `calculate bmr female, very active, gain weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 2,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 4,
-            goal = 3
-        )
-        assertThat(result).isEqualTo(2293)
-    }
-
-    @Test
-    fun `calculate bmr female, extra active, loose weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 2,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 5,
-            goal = 1
-        )
-        assertThat(result).isEqualTo(1817)
-    }
-
-    @Test
-    fun `calculate bmr female, extra active, keep weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 2,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 5,
-            goal = 2
-        )
-        assertThat(result).isEqualTo(2117)
-    }
-
-    @Test
-    fun `calculate bmr female, extra active, gain weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 2,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 5,
-            goal = 3
-        )
-        assertThat(result).isEqualTo(2417)
-    }
-    // endregion female tests
-
-
-    // region male tests
-    @Test
-    fun `calculate bmr male, little exercise, loose weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
+    fun `bmr for goal loose weight returns correct value`() {
+        val result = BMRCalculatorUtil.calculateBMRForGoal(
             gender = 1,
-            weight = 50f,
-            height = 165f,
+            weight = 50.0f,
+            height = 150.0f,
             age = 25,
             activity = 1,
             goal = 1
         )
-        assertThat(result).isEqualTo(1535)
+        assertThat(result).isEqualTo(1282.8)
     }
 
     @Test
-    fun `calculate bmr male, little exercise, keep weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
+    fun `bmr for goal keep weight returns correct value`() {
+        val result = BMRCalculatorUtil.calculateBMRForGoal(
             gender = 1,
-            weight = 50f,
-            height = 165f,
+            weight = 50.0f,
+            height = 150.0f,
             age = 25,
             activity = 1,
             goal = 2
         )
-        assertThat(result).isEqualTo(1835)
+        assertThat(result).isEqualTo(1582.8)
     }
 
     @Test
-    fun `calculate bmr male, little exercise, gain weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
+    fun `bmr for goal gain weight returns correct value`() {
+        val result = BMRCalculatorUtil.calculateBMRForGoal(
             gender = 1,
-            weight = 50f,
-            height = 165f,
+            weight = 50.0f,
+            height = 150.0f,
             age = 25,
             activity = 1,
             goal = 3
         )
-        assertThat(result).isEqualTo(2135)
+        assertThat(result).isEqualTo(1882.8)
     }
-
-    @Test
-    fun `calculate bmr male, light exercise, loose weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 1,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 2,
-            goal = 1
-        )
-        assertThat(result).isEqualTo(1676)
-    }
-
-    @Test
-    fun `calculate bmr male, light exercise, keep weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 1,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 2,
-            goal = 2
-        )
-        assertThat(result).isEqualTo(1976)
-    }
-
-    @Test
-    fun `calculate bmr male, light exercise, gain weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 1,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 2,
-            goal = 3
-        )
-        assertThat(result).isEqualTo(2276)
-    }
-
-    @Test
-    fun `calculate bmr male, moderate exercise, loose weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 1,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 3,
-            goal = 1
-        )
-        assertThat(result).isEqualTo(1817)
-    }
-
-    @Test
-    fun `calculate bmr male, moderate exercise, keep weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 1,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 3,
-            goal = 2
-        )
-        assertThat(result).isEqualTo(2187)
-    }
-
-    @Test
-    fun `calculate bmr male, moderate exercise, gain weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 1,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 3,
-            goal = 3
-        )
-        assertThat(result).isEqualTo(2487)
-    }
-
-    @Test
-    fun `calculate bmr male, very active, loose weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 1,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 4,
-            goal = 1
-        )
-        assertThat(result).isEqualTo(1958)
-    }
-
-    @Test
-    fun `calculate bmr male, very active, keep weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 1,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 4,
-            goal = 2
-        )
-        assertThat(result).isEqualTo(2258)
-    }
-
-    @Test
-    fun `calculate bmr male, very active, gain weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 1,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 4,
-            goal = 3
-        )
-        assertThat(result).isEqualTo(2558)
-    }
-
-    @Test
-    fun `calculate bmr male, extra active, loose weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 1,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 5,
-            goal = 1
-        )
-        assertThat(result).isEqualTo(2100)
-    }
-
-    @Test
-    fun `calculate bmr male, extra active, keep weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 1,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 5,
-            goal = 2
-        )
-        assertThat(result).isEqualTo(2400)
-    }
-
-    @Test
-    fun `calculate bmr male, extra active, gain weight`() {
-        val result = BMRCalculatorUtil.calculateBMR(
-            gender = 1,
-            weight = 50f,
-            height = 165f,
-            age = 25,
-            activity = 5,
-            goal = 3
-        )
-        assertThat(result).isEqualTo(2700)
-    }
-    
-    // endregion male test
 
 }
