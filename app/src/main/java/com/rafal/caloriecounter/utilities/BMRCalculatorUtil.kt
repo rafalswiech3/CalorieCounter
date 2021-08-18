@@ -1,7 +1,7 @@
 package com.rafal.caloriecounter.utilities
 
-class BMRCalculatorUtil {
-    fun validateGender(input: String): Boolean {
+object BMRCalculatorUtil {
+    fun validateGender(input: Int): Boolean {
         return false
     }
 
@@ -17,21 +17,21 @@ class BMRCalculatorUtil {
         return false
     }
 
-    fun validateActivity(input: String): Boolean {
+    fun validateActivity(input: Int): Boolean {
         return false
     }
 
-    fun validateGoal(input: String): Boolean {
+    fun validateGoal(input: Int): Boolean {
         return false
     }
 
     fun calculateBMR(
-        gender: String,
+        gender: Int,
         weight: Float,
         height: Float,
         age: Int,
-        activity: String,
-        goal: String
+        activity: Int,
+        goal: Int
     ): Int {
         return 0
     }

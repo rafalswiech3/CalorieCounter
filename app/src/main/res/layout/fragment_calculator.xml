@@ -51,6 +51,7 @@
                 android:id="@+id/calc_weight_in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:hint="@string/weight" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,6 +87,7 @@
                 android:id="@+id/calc_height_in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:hint="@string/height" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,6 +123,7 @@
                 android:id="@+id/calc_age_in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
                 android:hint="@string/age" />
         </com.google.android.material.textfield.TextInputLayout>
 
