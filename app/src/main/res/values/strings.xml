@@ -12,8 +12,28 @@
     <string name="years">years</string>
     <string name="cm">cm</string>
     <string name="height">Height</string>
+    <string name="activity">Activity</string>
+    <string name="calculate">Calculate</string>
+    <string name="goal">Goal</string>
+    <string name="your_calculated_bmr">You calculated BMR is:</string>
+    <string name="apply">Apply</string>
     <array name="genders">
+        <item>Select</item>
         <item>Male</item>
         <item>Female</item>
+    </array>
+    <array name="activity_level">
+        <item>Select</item>
+        <item>Little/No exercise</item>
+        <item>Light exercise</item>
+        <item>Moderate exercise (3-5 days/week)</item>
+        <item>Very active (6-7 days/week)</item>
+        <item>Extra active (very active and physical job)</item>
+    </array>
+    <array name="goals">
+        <item>Select</item>
+        <item>I want to loose weight</item>
+        <item>I want to keep weight</item>
+        <item>I want to gain weight</item>
     </array>
 </resources>
