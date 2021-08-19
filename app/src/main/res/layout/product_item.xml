@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
     android:layout_margin="1dp"
-    android:background="#D1D1D1">
+    android:background="#EFEFEF"
+    android:padding="5dp">
 
     <TextView
         android:id="@+id/product_item_title_tv"
@@ -31,6 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="50 kcal"
+        app:layout_constraintEnd_toStartOf="@+id/product_item_protein_tv"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/product_item_quantity_tv" />
 
@@ -38,9 +41,10 @@
         android:id="@+id/product_item_protein_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
         android:text="3.5g"
         app:layout_constraintBottom_toBottomOf="@+id/product_item_kcal_tv"
+        app:layout_constraintEnd_toStartOf="@+id/product_item_fat_tv"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/product_item_kcal_tv"
         app:layout_constraintTop_toTopOf="@+id/product_item_kcal_tv" />
 
@@ -48,9 +52,10 @@
         android:id="@+id/product_item_fat_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
         android:text="4.5g"
         app:layout_constraintBottom_toBottomOf="@+id/product_item_protein_tv"
+        app:layout_constraintEnd_toStartOf="@+id/product_item_carbs_tv"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/product_item_protein_tv"
         app:layout_constraintTop_toTopOf="@+id/product_item_protein_tv" />
 
@@ -58,9 +63,10 @@
         android:id="@+id/product_item_carbs_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
         android:text="5.5g"
         app:layout_constraintBottom_toBottomOf="@+id/product_item_fat_tv"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/product_item_fat_tv"
         app:layout_constraintTop_toTopOf="@+id/product_item_fat_tv" />
 
@@ -69,7 +75,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/remove_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
