@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.rafal.caloriecounter.R
 import com.rafal.caloriecounter.databinding.FragmentCalculatorBinding
 import com.rafal.caloriecounter.utilities.BMRCalculatorUtil
@@ -31,56 +32,79 @@ class CalculatorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.calcCalculateBtn.setOnClickListener(calculateButtonListener)
+        binding.apply {
+            calcCalculateBtn.setOnClickListener(calculateButtonListener)
+            calcApplyButton.setOnClickListener(applyButtonClickListener)
+        }
+
+
 
         viewModel.bmrLiveData.observe(viewLifecycleOwner) { bmr ->
-            binding.calcCalculatedBmrTv.visibility = View.VISIBLE
-            binding.calcCalculatedBmrTv.text = bmr.toString() + " ${getString(R.string.kcal)}"
-            binding.calcYourBmrTv.visibility = View.VISIBLE
-            binding.calcApplyButton.visibility = View.VISIBLE
+            binding.apply {
+                calcCalculatedBmrTv.visibility = View.VISIBLE
+                calcCalculatedBmrTv.text = bmr.toFloat().toString() + " ${getString(R.string.kcal)}"
+                calcYourBmrTv.visibility = View.VISIBLE
+                calcApplyButton.visibility = View.VISIBLE
+            }
         }
+
+
+    }
+
+    private val applyButtonClickListener = View.OnClickListener {
+        val action = CalculatorFragmentDirections.actionCalculatorFragmentToDailyFragment()
+        findNavController().navigate(action)
     }
 
     private val calculateButtonListener = View.OnClickListener {
-        var validationFailed = false
-        if (!BMRCalculatorUtil.validateGender(binding.calcGenderSpinner.selectedItemPosition)) {
-            (binding.calcGenderSpinner.selectedView as TextView).error =
-                getString(R.string.item_required)
-            validationFailed = true
-        }
-        if (!BMRCalculatorUtil.validateWeight(binding.calcWeightIn.text.toString())) {
-            binding.calcWeightIn.error = getString(R.string.item_required)
-            validationFailed = true
-        }
-        if (!BMRCalculatorUtil.validateHeight(binding.calcHeightIn.text.toString())) {
-            binding.calcHeightIn.error = getString(R.string.item_required)
-            validationFailed = true
-        }
-        if (!BMRCalculatorUtil.validateAge(binding.calcAgeIn.text.toString())) {
-            binding.calcAgeIn.error = getString(R.string.item_required)
-            validationFailed = true
-        }
-        if (!BMRCalculatorUtil.validateActivity(binding.calcActivitySpinner.selectedItemPosition)) {
-            (binding.calcActivitySpinner.selectedView as TextView).error =
-                getString(R.string.item_required)
-            validationFailed = true
-        }
-        if (!BMRCalculatorUtil.validateGoal(binding.calcGoalSpinner.selectedItemPosition)) {
-            (binding.calcGoalSpinner.selectedView as TextView).error =
-                getString(R.string.item_required)
-            validationFailed = true
-        }
+        var validationFailed = validateForm()
 
         if (!validationFailed) {
-            viewModel.calculateBMR(
-                gender = binding.calcGenderSpinner.selectedItemPosition,
-                weight = binding.calcWeightIn.text.toString().toFloat(),
-                height = binding.calcHeightIn.text.toString().toFloat(),
-                age = binding.calcAgeIn.text.toString().toInt(),
-                activity = binding.calcActivitySpinner.selectedItemPosition,
-                goal = binding.calcGoalSpinner.selectedItemPosition
-            )
+            binding.apply {
+                viewModel.calculateBMR(
+                    gender = calcGenderSpinner.selectedItemPosition,
+                    weight = calcWeightIn.text.toString().toFloat(),
+                    height = calcHeightIn.text.toString().toFloat(),
+                    age = calcAgeIn.text.toString().toInt(),
+                    activity = calcActivitySpinner.selectedItemPosition,
+                    goal = calcGoalSpinner.selectedItemPosition
+                )
+            }
         }
+    }
+
+    private fun validateForm(): Boolean {
+        var validationFailed = false
+        binding.apply {
+            if (!BMRCalculatorUtil.validateGender(calcGenderSpinner.selectedItemPosition)) {
+                (calcGenderSpinner.selectedView as TextView).error =
+                    getString(R.string.item_required)
+                validationFailed = true
+            }
+            if (!BMRCalculatorUtil.validateWeight(calcWeightIn.text.toString())) {
+                calcWeightIn.error = getString(R.string.item_required)
+                validationFailed = true
+            }
+            if (!BMRCalculatorUtil.validateHeight(calcHeightIn.text.toString())) {
+                calcHeightIn.error = getString(R.string.item_required)
+                validationFailed = true
+            }
+            if (!BMRCalculatorUtil.validateAge(calcAgeIn.text.toString())) {
+                calcAgeIn.error = getString(R.string.item_required)
+                validationFailed = true
+            }
+            if (!BMRCalculatorUtil.validateActivity(calcActivitySpinner.selectedItemPosition)) {
+                (calcActivitySpinner.selectedView as TextView).error =
+                    getString(R.string.item_required)
+                validationFailed = true
+            }
+            if (!BMRCalculatorUtil.validateGoal(calcGoalSpinner.selectedItemPosition)) {
+                (calcGoalSpinner.selectedView as TextView).error =
+                    getString(R.string.item_required)
+                validationFailed = true
+            }
+        }
+        return validationFailed
     }
 
 }
