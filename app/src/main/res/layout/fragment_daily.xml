@@ -1,14 +1,397 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".DailyFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--            BREAKFAST-->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/daily_breakfast_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/breakfast"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/daily_breakfast_kcal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="50 kcal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/daily_breakfast_title" />
+
+                <TextView
+                    android:id="@+id/daily_breakfast_protein"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="4.5 g"
+                    app:layout_constraintBottom_toBottomOf="@+id/daily_breakfast_kcal"
+                    app:layout_constraintStart_toEndOf="@+id/daily_breakfast_kcal"
+                    app:layout_constraintTop_toTopOf="@+id/daily_breakfast_kcal" />
+
+                <TextView
+                    android:id="@+id/daily_breakfast_fat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="4.5 g"
+                    app:layout_constraintBottom_toBottomOf="@+id/daily_breakfast_protein"
+                    app:layout_constraintStart_toEndOf="@+id/daily_breakfast_protein"
+                    app:layout_constraintTop_toTopOf="@+id/daily_breakfast_protein" />
+
+                <TextView
+                    android:id="@+id/daily_breakfast_carbs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="4.5 g"
+                    app:layout_constraintBottom_toBottomOf="@+id/daily_breakfast_fat"
+                    app:layout_constraintStart_toEndOf="@+id/daily_breakfast_fat"
+                    app:layout_constraintTop_toTopOf="@+id/daily_breakfast_fat" />
+
+                <ImageView
+                    android:id="@+id/daily_breakfast_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_add_circle_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/daily_breakfast_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="1"
+                tools:listitem="@layout/product_item" />
+
+
+            <!--        SECOND BREAKFAST-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/daily_second_breakfast_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/second_breakfast"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/daily_second_breakfast_kcal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="50 kcal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/daily_second_breakfast_title" />
+
+                <TextView
+                    android:id="@+id/daily_second_breakfast_protein"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="4.5 g"
+                    app:layout_constraintBottom_toBottomOf="@+id/daily_second_breakfast_kcal"
+                    app:layout_constraintStart_toEndOf="@+id/daily_second_breakfast_kcal"
+                    app:layout_constraintTop_toTopOf="@+id/daily_second_breakfast_kcal" />
+
+                <TextView
+                    android:id="@+id/daily_second_breakfast_fat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="4.5 g"
+                    app:layout_constraintBottom_toBottomOf="@+id/daily_second_breakfast_protein"
+                    app:layout_constraintStart_toEndOf="@+id/daily_second_breakfast_protein"
+                    app:layout_constraintTop_toTopOf="@+id/daily_second_breakfast_protein" />
+
+                <TextView
+                    android:id="@+id/daily_second_breakfast_carbs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="4.5 g"
+                    app:layout_constraintBottom_toBottomOf="@+id/daily_second_breakfast_fat"
+                    app:layout_constraintStart_toEndOf="@+id/daily_second_breakfast_fat"
+                    app:layout_constraintTop_toTopOf="@+id/daily_second_breakfast_fat" />
+
+                <ImageView
+                    android:id="@+id/daily_second_breakfast_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_add_circle_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/daily_second_breakfast_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="1"
+                tools:listitem="@layout/product_item" />
+
+            <!--        LUNCH-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/daily_lunch_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lunch"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/daily_lunch_kcal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="50 kcal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/daily_lunch_title" />
+
+                <TextView
+                    android:id="@+id/daily_lunch_protein"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="4.5 g"
+                    app:layout_constraintBottom_toBottomOf="@+id/daily_lunch_kcal"
+                    app:layout_constraintStart_toEndOf="@+id/daily_lunch_kcal"
+                    app:layout_constraintTop_toTopOf="@+id/daily_lunch_kcal" />
+
+                <TextView
+                    android:id="@+id/daily_lunch_fat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="4.5 g"
+                    app:layout_constraintBottom_toBottomOf="@+id/daily_lunch_protein"
+                    app:layout_constraintStart_toEndOf="@+id/daily_lunch_protein"
+                    app:layout_constraintTop_toTopOf="@+id/daily_lunch_protein" />
+
+                <TextView
+                    android:id="@+id/daily_lunch_carbs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="4.5 g"
+                    app:layout_constraintBottom_toBottomOf="@+id/daily_lunch_fat"
+                    app:layout_constraintStart_toEndOf="@+id/daily_lunch_fat"
+                    app:layout_constraintTop_toTopOf="@+id/daily_lunch_fat" />
+
+                <ImageView
+                    android:id="@+id/daily_lunch_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_add_circle_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/daily_lunch_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="1"
+                tools:listitem="@layout/product_item" />
+
+            <!--        DINER-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/daily_diner_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/diner"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/daily_diner_kcal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="50 kcal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/daily_diner_title" />
+
+                <TextView
+                    android:id="@+id/daily_diner_protein"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="4.5 g"
+                    app:layout_constraintBottom_toBottomOf="@+id/daily_diner_kcal"
+                    app:layout_constraintStart_toEndOf="@+id/daily_diner_kcal"
+                    app:layout_constraintTop_toTopOf="@+id/daily_diner_kcal" />
+
+                <TextView
+                    android:id="@+id/daily_diner_fat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="4.5 g"
+                    app:layout_constraintBottom_toBottomOf="@+id/daily_diner_protein"
+                    app:layout_constraintStart_toEndOf="@+id/daily_diner_protein"
+                    app:layout_constraintTop_toTopOf="@+id/daily_diner_protein" />
+
+                <TextView
+                    android:id="@+id/daily_diner_carbs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="4.5 g"
+                    app:layout_constraintBottom_toBottomOf="@+id/daily_diner_fat"
+                    app:layout_constraintStart_toEndOf="@+id/daily_diner_fat"
+                    app:layout_constraintTop_toTopOf="@+id/daily_diner_fat" />
+
+                <ImageView
+                    android:id="@+id/daily_diner_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_add_circle_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/daily_diner_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="1"
+                tools:listitem="@layout/product_item" />
+
+            <!--        SUPPER-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/daily_supper_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/supper"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/daily_supper_kcal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="50 kcal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/daily_supper_title" />
+
+                <TextView
+                    android:id="@+id/daily_supper_protein"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="4.5 g"
+                    app:layout_constraintBottom_toBottomOf="@+id/daily_supper_kcal"
+                    app:layout_constraintStart_toEndOf="@+id/daily_supper_kcal"
+                    app:layout_constraintTop_toTopOf="@+id/daily_supper_kcal" />
+
+                <TextView
+                    android:id="@+id/daily_supper_fat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="4.5 g"
+                    app:layout_constraintBottom_toBottomOf="@+id/daily_supper_protein"
+                    app:layout_constraintStart_toEndOf="@+id/daily_supper_protein"
+                    app:layout_constraintTop_toTopOf="@+id/daily_supper_protein" />
+
+                <TextView
+                    android:id="@+id/daily_supper_carbs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="4.5 g"
+                    app:layout_constraintBottom_toBottomOf="@+id/daily_supper_fat"
+                    app:layout_constraintStart_toEndOf="@+id/daily_supper_fat"
+                    app:layout_constraintTop_toTopOf="@+id/daily_supper_fat" />
+
+                <ImageView
+                    android:id="@+id/daily_supper_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_add_circle_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/daily_supper_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="1"
+                tools:listitem="@layout/product_item" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

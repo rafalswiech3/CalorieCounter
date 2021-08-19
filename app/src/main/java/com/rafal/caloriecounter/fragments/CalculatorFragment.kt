@@ -37,8 +37,6 @@ class CalculatorFragment : Fragment() {
             calcApplyButton.setOnClickListener(applyButtonClickListener)
         }
 
-
-
         viewModel.bmrLiveData.observe(viewLifecycleOwner) { bmr ->
             binding.apply {
                 calcCalculatedBmrTv.visibility = View.VISIBLE
@@ -47,8 +45,6 @@ class CalculatorFragment : Fragment() {
                 calcApplyButton.visibility = View.VISIBLE
             }
         }
-
-
     }
 
     private val applyButtonClickListener = View.OnClickListener {
