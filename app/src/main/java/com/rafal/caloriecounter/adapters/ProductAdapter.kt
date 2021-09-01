@@ -3,17 +3,18 @@ package com.rafal.caloriecounter.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.rafal.caloriecounter.data.IngredientSearch
 import com.rafal.caloriecounter.databinding.ProductItemBinding
 
 class ProductAdapter(
-    private val data: List<String>
+    private val data: List<IngredientSearch>
 ) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     class ViewHolder(private val binding: ProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(text: String) {
-            binding.productItemTitleTv.text = text
+        fun bind(ingredient: IngredientSearch) {
+            binding.productItemTitleTv.text = ingredient.name
         }
     }
 

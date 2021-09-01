@@ -7,18 +7,24 @@ import com.rafal.caloriecounter.databinding.MealItemBinding
 
 class MealsAdapter(
     private val items: List<String>,
-    private val addItemListener: AddItemClickListener
+    private val mealsListener: MealsAdapterListener
 ) : RecyclerView.Adapter<MealsAdapter.ViewHolder>() {
 
-    inner class ViewHolder(private val binding: MealItemBinding) :
+    val viewHolders = mutableListOf<ViewHolder>()
+
+    inner class ViewHolder(val binding: MealItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(title: String, pos: Int) {
             binding.titleTv.text = title
 
             binding.addBtn.setOnClickListener {
-                addItemListener.addItemClicked(pos)
+                mealsListener.addItemClicked(pos)
             }
+
+            viewHolders.add(this)
+
+            mealsListener.viewHolderBind(pos, this)
         }
     }
 
@@ -35,7 +41,8 @@ class MealsAdapter(
         return items.size
     }
 
-    interface AddItemClickListener {
+    interface MealsAdapterListener {
         fun addItemClicked(pos: Int)
+        fun viewHolderBind(pos: Int, holder: ViewHolder)
     }
 }

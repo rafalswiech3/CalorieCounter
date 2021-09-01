@@ -5,14 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
-    tools:context=".fragments.DailyFragment">
+    tools:context=".fragments.SearchFragment">
+
+    <androidx.appcompat.widget.SearchView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:iconifiedByDefault="false"
+        app:queryHint="Search ..." />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/daily_rv"
+        android:id="@+id/search_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="5"
-        tools:listitem="@layout/meal_item" />
+        tools:listitem="@layout/meal_item_search" />
+
 </LinearLayout>
