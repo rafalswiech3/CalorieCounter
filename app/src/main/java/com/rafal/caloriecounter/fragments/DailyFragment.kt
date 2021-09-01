@@ -29,6 +29,8 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener {
 
     private val products = Array<MutableList<IngredientSearch>>(5) { mutableListOf() }
 
+    private lateinit var meals: List<String>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,7 +42,7 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val meals = listOf(
+        meals = listOf(
             getString(R.string.breakfast),
             getString(R.string.second_breakfast),
             getString(R.string.lunch),
@@ -52,6 +54,10 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener {
         val rv = binding.dailyRv
         rv.adapter = adapter
 
+        loadAllProducts()
+    }
+
+    private fun loadAllProducts() {
         meals.forEachIndexed { index, s ->
             viewModel.loadProducts(index)
         }
