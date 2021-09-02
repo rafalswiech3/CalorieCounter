@@ -35,11 +35,9 @@ class SearchViewModel @Inject constructor(
     }
 
     fun addIngredient(meal: Int, ingredient: IngredientSearch) {
-        Log.d("TAG", "ADD")
         ingredient.meal = meal
         viewModelScope.launch {
             ingredientDao.insertAll(ingredient)
         }
     }
-
 }

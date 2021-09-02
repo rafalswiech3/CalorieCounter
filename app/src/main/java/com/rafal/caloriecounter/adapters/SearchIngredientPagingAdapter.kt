@@ -1,5 +1,6 @@
 package com.rafal.caloriecounter.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -11,18 +12,30 @@ import com.rafal.caloriecounter.databinding.MealItemSearchBinding
 
 class SearchIngredientPagingAdapter(
     private val listener: OnItemClickListener
-) : PagingDataAdapter<IngredientSearch, SearchIngredientPagingAdapter.ViewHolder>(IngredientComparator()){
-    inner class ViewHolder(private val binding: MealItemSearchBinding) : RecyclerView.ViewHolder(binding.root) {
+) : PagingDataAdapter<IngredientSearch, SearchIngredientPagingAdapter.ViewHolder>(
+    IngredientComparator()
+) {
+    inner class ViewHolder(private val binding: MealItemSearchBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
         fun bind(item: IngredientSearch) {
-            binding.itemSearchTitle.text = item.name
+
+            Log.d("TAG", "LOADING!!!")
 
             Glide.with(itemView)
                 .load("https://spoonacular.com/cdn/ingredients_100x100/${item.image}")
                 .circleCrop()
                 .into(binding.itemSearchIv)
 
-            binding.root.setOnClickListener {
-                listener.onItemClick(0, item)
+            binding.apply {
+                itemSearchTitle.text = item.name
+                root.setOnClickListener {
+                    listener.onItemClick(0, item)
+                }
+
+                itemSearchWeight.text = item.amount?.toString()
+
+                itemSearchKcal.text = item.nutrients?.getCalories()?.amount.toString() + " kcal"
             }
         }
     }
@@ -30,17 +43,18 @@ class SearchIngredientPagingAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
 
-        if(item != null) {
+        if (item != null) {
             holder.bind(item)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = MealItemSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            MealItemSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
-    class IngredientComparator: DiffUtil.ItemCallback<IngredientSearch>() {
+    class IngredientComparator : DiffUtil.ItemCallback<IngredientSearch>() {
         override fun areItemsTheSame(
             oldItem: IngredientSearch,
             newItem: IngredientSearch

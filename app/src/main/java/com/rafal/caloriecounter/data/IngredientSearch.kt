@@ -1,7 +1,10 @@
 package com.rafal.caloriecounter.data
 
+import androidx.room.Embedded
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
 @Entity
 data class IngredientSearch (
@@ -11,5 +14,5 @@ data class IngredientSearch (
     val name: String,
     val image: String,
     val amount: Float,
-    
+    @SerializedName("nutrition") val nutrients: Nutrients
 )

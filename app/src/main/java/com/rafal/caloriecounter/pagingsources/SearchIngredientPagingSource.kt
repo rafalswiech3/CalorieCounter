@@ -24,12 +24,26 @@ class SearchIngredientPagingSource(
             val response = api.searchIngredients(query, pos, metaInformation)
             val results = response.body()!!.results
 
+            val resultsWithInfo = mutableListOf<IngredientSearch>()
+
+            var index = 0
+            results.forEach {
+                if(index == 0) {
+                    val response = api.getIngredientInfo(id = it.id, amount = 100)
+                    resultsWithInfo.add(response.body()!!)
+                } else {
+                    resultsWithInfo.add(results[index])
+                }
+                index++
+            }
+
             LoadResult.Page(
-                data = results,
+                data = resultsWithInfo,
                 prevKey = if (pos == 0) null else pos - 10,
                 nextKey = if (results.isEmpty()) null else pos + 10
             )
         } catch (exception: Exception) {
+            Log.d("TAg", "Exception: ${exception.toString()}")
             return LoadResult.Error(exception)
         }
     }

@@ -16,13 +16,29 @@ class ProductAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(ingredient: IngredientSearch) {
-            binding.productItemTitleTv.text = ingredient.name
+            binding.apply {
+                productItemTitleTv.text = ingredient.name
+                productItemKcalTv.text = ingredient.nutrients.getCalories().let {
+                    "${it.amount} ${it.unit}"
+                }
+                productItemFatTv.text = ingredient.nutrients.getFat().let {
+                    "${it.amount} ${it.unit}"
+                }
+                productItemCarbsTv.text = ingredient.nutrients.getCarbs().let {
+                    "${it.amount} ${it.unit}"
+                }
+                productItemProteinTv.text =
+                    ingredient.nutrients.getProtein().let {
+                        "${it.amount} ${it.unit}"
+                    }
 
-            binding.productItemRemoveBtn.setOnClickListener {
-                listener.onProductRemoveClick(ingredient, mealIndex)
+                productItemRemoveBtn.setOnClickListener {
+                    listener.onProductRemoveClick(ingredient, mealIndex)
+                }
             }
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ProductItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
