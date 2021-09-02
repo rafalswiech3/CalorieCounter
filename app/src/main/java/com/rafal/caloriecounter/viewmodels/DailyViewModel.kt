@@ -27,4 +27,15 @@ class DailyViewModel @Inject constructor(
             _productsLiveDataArray[mealID].postValue(products)
         }
     }
+
+    fun deleteProduct(ingredient: IngredientSearch, mealIndex: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.removeProduct(ingredient)
+            _productsLiveDataArray[mealIndex].value?.let {
+                val list = it.toMutableList()
+                list.remove(ingredient)
+                _productsLiveDataArray[mealIndex].postValue(list)
+            }
+        }
+    }
 }

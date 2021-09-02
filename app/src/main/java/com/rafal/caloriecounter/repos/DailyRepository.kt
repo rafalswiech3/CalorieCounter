@@ -10,4 +10,8 @@ class DailyRepository @Inject constructor(
     suspend fun loadProducts(mealID: Int): List<IngredientSearch> {
         return ingredientDao.loadByMeal(mealID)
     }
+
+    suspend fun removeProduct(ingredient: IngredientSearch) {
+        ingredientDao.delete(ingredient)
+    }
 }

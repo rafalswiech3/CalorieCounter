@@ -7,14 +7,20 @@ import com.rafal.caloriecounter.data.IngredientSearch
 import com.rafal.caloriecounter.databinding.ProductItemBinding
 
 class ProductAdapter(
-    private val data: List<IngredientSearch>
+    private val data: List<IngredientSearch>,
+    private val listener: ProductAdapterListener,
+    private val mealIndex: Int
 ) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
-    class ViewHolder(private val binding: ProductItemBinding) :
+    inner class ViewHolder(private val binding: ProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(ingredient: IngredientSearch) {
             binding.productItemTitleTv.text = ingredient.name
+
+            binding.productItemRemoveBtn.setOnClickListener {
+                listener.onProductRemoveClick(ingredient, mealIndex)
+            }
         }
     }
 
@@ -30,5 +36,9 @@ class ProductAdapter(
 
     override fun getItemCount(): Int {
         return data.size
+    }
+
+    interface ProductAdapterListener {
+        fun onProductRemoveClick(ingredient: IngredientSearch, mealIndex: Int)
     }
 }

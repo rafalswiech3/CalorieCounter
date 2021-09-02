@@ -52,7 +52,7 @@ class SearchFragment : Fragment(), SearchIngredientPagingAdapter.OnItemClickList
             pagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
-        viewModel.searchIngredients("cheese", true)
+        viewModel.searchIngredients("cheese", false)
     }
 
     override fun onItemClick(id: Int, ingredient: IngredientSearch) {

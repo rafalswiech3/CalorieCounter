@@ -19,7 +19,8 @@ import com.rafal.caloriecounter.viewmodels.DailyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener {
+class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
+    ProductAdapter.ProductAdapterListener {
     private var _binding: FragmentDailyBinding? = null
     private val binding get() = _binding!!
 
@@ -64,11 +65,11 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener {
     }
 
     override fun viewHolderBind(pos: Int, holder: MealsAdapter.ViewHolder) {
-        viewModel.productsLiveDataArray.apply {
-            holder.binding.rv.adapter = ProductAdapter(products[pos])
-            this[pos].observe(viewLifecycleOwner) {
+        viewModel.productsLiveDataArray.also {
+            holder.binding.rv.adapter = ProductAdapter(products[pos], this, pos)
+            it[pos].observe(viewLifecycleOwner) { list ->
                 products[pos].clear()
-                products[pos].addAll(it)
+                products[pos].addAll(list)
 
                 holder.binding.rv.adapter?.let {
                     it.notifyDataSetChanged()
@@ -80,5 +81,9 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener {
     override fun addItemClicked(pos: Int) {
         val action = DailyFragmentDirections.actionDailyFragmentToSearchFragment(mealID = pos)
         findNavController().navigate(action)
+    }
+
+    override fun onProductRemoveClick(ingredient: IngredientSearch, mealIndex: Int) {
+        viewModel.deleteProduct(ingredient, mealIndex)
     }
 }

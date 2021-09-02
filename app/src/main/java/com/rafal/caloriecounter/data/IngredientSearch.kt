@@ -9,5 +9,7 @@ data class IngredientSearch (
     val id: Int,
     var meal: Int,
     val name: String,
-    val image: String
+    val image: String,
+    val amount: Float,
+    
 )
