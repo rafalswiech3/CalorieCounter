@@ -1,7 +1,9 @@
 package com.rafal.caloriecounter.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.rafal.caloriecounter.databinding.MealItemBinding
 
@@ -22,8 +24,13 @@ class MealsAdapter(
                 mealsListener.addItemClicked(pos)
             }
 
-            viewHolders.add(this)
+            binding.root.setOnClickListener {
+                binding.apply {
+                    if(rv.isVisible) rv.visibility = View.GONE else rv.visibility = View.VISIBLE
+                }
+            }
 
+            viewHolders.add(this)
             mealsListener.viewHolderBind(pos, this)
         }
     }
