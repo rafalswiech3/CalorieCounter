@@ -14,9 +14,12 @@ import com.rafal.caloriecounter.R
 import com.rafal.caloriecounter.adapters.MealsAdapter
 import com.rafal.caloriecounter.adapters.ProductAdapter
 import com.rafal.caloriecounter.data.IngredientSearch
+import com.rafal.caloriecounter.data.MealTotals
 import com.rafal.caloriecounter.databinding.FragmentDailyBinding
 import com.rafal.caloriecounter.viewmodels.DailyViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
+private const val MEALS_COUNT = 5;
 
 @AndroidEntryPoint
 class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
@@ -28,9 +31,11 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
 
     val viewModel: DailyViewModel by viewModels()
 
-    private val products = Array<MutableList<IngredientSearch>>(5) { mutableListOf() }
+    private val products = Array<MutableList<IngredientSearch>>(MEALS_COUNT) { mutableListOf() }
 
     private lateinit var meals: List<String>
+
+    private val totalsList = Array<MealTotals>(MEALS_COUNT) { MealTotals(0f, 0f, 0f, 0f) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,8 +76,20 @@ class DailyFragment : Fragment(), MealsAdapter.MealsAdapterListener,
                 products[pos].clear()
                 products[pos].addAll(list)
 
-                holder.binding.rv.adapter?.let {
-                    it.notifyDataSetChanged()
+                totalsList[pos].clearAll()
+                list.forEach { item ->
+                    totalsList[pos].update(
+                        kcal = item.nutrients.getCalories().amount,
+                        fat = item.nutrients.getFat().amount,
+                        carbs = item.nutrients.getCarbs().amount,
+                        proteins = item.nutrients.getProtein().amount,
+                    )
+                }
+
+                adapter.viewHolders[pos].updateTotals(totalsList[pos])
+
+                holder.binding.rv.adapter?.let { adapter ->
+                    adapter.notifyDataSetChanged()
                 }
             }
         }

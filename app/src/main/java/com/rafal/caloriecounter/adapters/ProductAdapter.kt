@@ -17,7 +17,12 @@ class ProductAdapter(
 
         fun bind(ingredient: IngredientSearch) {
             binding.apply {
-                productItemTitleTv.text = ingredient.name
+                productItemTitleTv.text = ingredient.name.replaceFirstChar { it.uppercase() }
+
+                productItemQuantityTv.text = ingredient.let {
+                    "${it.amount} ${it.unit}"
+                }
+
                 productItemKcalTv.text = ingredient.nutrients.getCalories().let {
                     "${it.amount} ${it.unit}"
                 }

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.rafal.caloriecounter.data.MealTotals
 import com.rafal.caloriecounter.databinding.MealItemBinding
 
 class MealsAdapter(
@@ -32,6 +33,15 @@ class MealsAdapter(
 
             viewHolders.add(this)
             mealsListener.viewHolderBind(pos, this)
+        }
+
+        fun updateTotals(totals: MealTotals) {
+            binding.apply {
+                kcalTv.text = totals.kcal.toString() + " kcal"
+                fatTv.text = totals.fats.toString() + " g"
+                proteinTv.text = totals.proteins.toString() + " g"
+                carbsTv.text = totals.carbs.toString() + " g"
+            }
         }
     }
 

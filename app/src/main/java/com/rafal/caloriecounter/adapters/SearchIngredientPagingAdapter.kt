@@ -28,14 +28,17 @@ class SearchIngredientPagingAdapter(
                 .into(binding.itemSearchIv)
 
             binding.apply {
-                itemSearchTitle.text = item.name
+                itemSearchTitle.text = item.name.replaceFirstChar { it.uppercase() }
+
                 root.setOnClickListener {
                     listener.onItemClick(0, item)
                 }
 
-                itemSearchWeight.text = item.amount?.toString()
+                itemSearchWeight.text = "${item.amount?.toString()} ${item.unit}"
 
-                itemSearchKcal.text = item.nutrients?.getCalories()?.amount.toString() + " kcal"
+                itemSearchKcal.text = item.nutrients?.getCalories()?.let {
+                    "${it.amount} ${it.unit}"
+                }
             }
         }
     }

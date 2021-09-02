@@ -29,7 +29,7 @@ class SearchIngredientPagingSource(
             var index = 0
             results.forEach {
                 if(index == 0) {
-                    val response = api.getIngredientInfo(id = it.id, amount = 100)
+                    val response = api.getIngredientInfo(id = it.id, amount = 100, unit = "g")
                     resultsWithInfo.add(response.body()!!)
                 } else {
                     resultsWithInfo.add(results[index])

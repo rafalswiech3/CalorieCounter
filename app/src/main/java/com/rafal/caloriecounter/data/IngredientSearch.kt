@@ -14,5 +14,6 @@ data class IngredientSearch (
     val name: String,
     val image: String,
     val amount: Float,
+    val unit: String,
     @SerializedName("nutrition") val nutrients: Nutrients
 )

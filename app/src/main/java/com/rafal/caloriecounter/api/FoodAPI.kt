@@ -19,6 +19,7 @@ interface FoodAPI {
     @GET("food/ingredients/{id}/information")
     suspend fun getIngredientInfo(
         @Path("id") id: Int,
-        @Query("amount") amount: Int
+        @Query("amount") amount: Int,
+        @Query("unit") unit: String
     ) : Response<IngredientSearch>
 }
