@@ -26,15 +26,10 @@ class SearchIngredientPagingSource(
 
             val resultsWithInfo = mutableListOf<IngredientSearch>()
 
-            var index = 0
+
             results.forEach {
-                if(index == 0) {
-                    val response = api.getIngredientInfo(id = it.id, amount = 100, unit = "g")
-                    resultsWithInfo.add(response.body()!!)
-                } else {
-                    resultsWithInfo.add(results[index])
-                }
-                index++
+                val response = api.getIngredientInfo(id = it.id, amount = 100, unit = "g")
+                resultsWithInfo.add(response.body()!!)
             }
 
             LoadResult.Page(
@@ -43,7 +38,6 @@ class SearchIngredientPagingSource(
                 nextKey = if (results.isEmpty()) null else pos + 10
             )
         } catch (exception: Exception) {
-            Log.d("TAg", "Exception: ${exception.toString()}")
             return LoadResult.Error(exception)
         }
     }
