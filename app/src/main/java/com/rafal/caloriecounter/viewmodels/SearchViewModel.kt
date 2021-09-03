@@ -14,6 +14,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,8 +36,12 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    fun addIngredient(meal: Int, ingredient: IngredientSearch) {
+    fun addIngredient(meal: Int, date: String, ingredient: IngredientSearch, amount: Int) {
         ingredient.meal = meal
+        ingredient.amount = amount.toFloat()
+        ingredient.nutrients.updateAll(amount)
+        ingredient.date = date
+        Log.d("TAG", ingredient.date)
         viewModelScope.launch {
             ingredientDao.insertAll(ingredient)
         }

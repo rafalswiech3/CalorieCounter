@@ -18,5 +18,12 @@ data class Nutrients(
     fun getCarbs() = nutrients.first {
         it.name == "Carbohydrates"
     }
+
+    fun updateAll(amount: Int) {
+        getCalories().amount *= (amount / 100.0f)
+        getFat().amount *= (amount / 100.0f)
+        getProtein().amount *= (amount / 100.0f)
+        getCarbs().amount *= (amount / 100.0f)
+    }
 }
 

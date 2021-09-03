@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.rafal.caloriecounter.data.MealTotals
 import com.rafal.caloriecounter.databinding.MealItemBinding
+import java.text.DecimalFormat
 
 class MealsAdapter(
     private val items: List<String>,
@@ -37,10 +38,10 @@ class MealsAdapter(
 
         fun updateTotals(totals: MealTotals) {
             binding.apply {
-                kcalTv.text = totals.kcal.toString() + " kcal"
-                fatTv.text = totals.fats.toString() + " g"
-                proteinTv.text = totals.proteins.toString() + " g"
-                carbsTv.text = totals.carbs.toString() + " g"
+                kcalTv.text = String.format("%.2f", totals.kcal) + " kcal"
+                fatTv.text = String.format("%.2f", totals.fats) + " g"
+                proteinTv.text = String.format("%.2f", totals.proteins) + " g"
+                carbsTv.text = String.format("%.2f", totals.carbs) + " g"
             }
         }
     }

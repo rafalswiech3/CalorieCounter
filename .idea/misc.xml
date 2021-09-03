@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/remove_circle.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.31666666666666665" />
+        <entry key="app/src/main/res/layout/add_ingredient_dialog.xml" value="0.34322916666666664" />
         <entry key="app/src/main/res/layout/fragment_calculator.xml" value="0.3026041666666667" />
         <entry key="app/src/main/res/layout/fragment_daily.xml" value="0.32916666666666666" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.32916666666666666" />
@@ -12,6 +13,7 @@
         <entry key="app/src/main/res/layout/meal_item.xml" value="0.31666666666666665" />
         <entry key="app/src/main/res/layout/meal_item_search.xml" value="0.34322916666666664" />
         <entry key="app/src/main/res/layout/product_item.xml" value="0.34322916666666664" />
+        <entry key="app/src/main/res/menu/daily_menu.xml" value="0.31666666666666665" />
       </map>
     </option>
   </component>

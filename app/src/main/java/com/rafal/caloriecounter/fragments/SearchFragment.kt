@@ -1,14 +1,17 @@
 package com.rafal.caloriecounter.fragments
 
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 import com.rafal.caloriecounter.R
 import com.rafal.caloriecounter.adapters.SearchIngredientPagingAdapter
 import com.rafal.caloriecounter.api.FoodAPI
@@ -16,8 +19,6 @@ import com.rafal.caloriecounter.data.IngredientSearch
 import com.rafal.caloriecounter.databinding.FragmentSearchBinding
 import com.rafal.caloriecounter.viewmodels.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -52,10 +53,32 @@ class SearchFragment : Fragment(), SearchIngredientPagingAdapter.OnItemClickList
             pagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
-        viewModel.searchIngredients("cheese", false)
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    if (it.isNotEmpty()) viewModel.searchIngredients(it, false)
+                    return true
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
     }
 
     override fun onItemClick(id: Int, ingredient: IngredientSearch) {
-        viewModel.addIngredient(args.mealID, ingredient)
+        MaterialDialog(requireContext()).show {
+            title(R.string.add_ingredient_dialog_title)
+            input(
+                hintRes = R.string.amount,
+                inputType = InputType.TYPE_CLASS_NUMBER
+            ) { dialog, text ->
+                viewModel.addIngredient(args.mealID, args.date, ingredient, text.toString().toInt())
+            }
+            positiveButton(R.string.add)
+            negativeButton(R.string.cancel)
+        }
     }
 }

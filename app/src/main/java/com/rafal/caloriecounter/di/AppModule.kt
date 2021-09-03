@@ -1,6 +1,7 @@
 package com.rafal.caloriecounter.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.rafal.caloriecounter.api.FoodAPI
 import com.rafal.caloriecounter.db.AppDatabase
@@ -69,5 +70,9 @@ class AppModule {
         return db.ingredientDao()
     }
 
-
+    @Provides
+    @Singleton
+    fun provideSharedPrefs(@ApplicationContext context: Context) : SharedPreferences {
+        return context.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
+    }
 }

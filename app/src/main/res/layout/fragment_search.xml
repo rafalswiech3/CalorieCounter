@@ -8,6 +8,7 @@
     tools:context=".fragments.SearchFragment">
 
     <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

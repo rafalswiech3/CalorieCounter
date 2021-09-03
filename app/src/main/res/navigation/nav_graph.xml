@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/dailyFragment">
+    app:startDestination="@id/welcomeFragment">
 
     <fragment
         android:id="@+id/calculatorFragment"
@@ -13,6 +13,8 @@
         <action
             android:id="@+id/action_calculatorFragment_to_dailyFragment"
             app:destination="@id/dailyFragment"
+            app:popUpTo="@id/welcomeFragment"
+            app:popUpToInclusive="true"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
@@ -30,6 +32,11 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            app:popUpTo="@id/welcomeFragment"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_welcomeFragment_to_dailyFragment"
+            app:destination="@id/dailyFragment" />
     </fragment>
     <fragment
         android:id="@+id/dailyFragment"
@@ -39,6 +46,9 @@
         <action
             android:id="@+id/action_dailyFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_dailyFragment_to_calculatorFragment"
+            app:destination="@id/calculatorFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -49,5 +59,8 @@
             android:name="mealID"
             app:argType="integer"
             android:defaultValue="0" />
+        <argument
+            android:name="date"
+            app:argType="string" />
     </fragment>
 </navigation>

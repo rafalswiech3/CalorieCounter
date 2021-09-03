@@ -24,17 +24,17 @@ class ProductAdapter(
                 }
 
                 productItemKcalTv.text = ingredient.nutrients.getCalories().let {
-                    "${it.amount} ${it.unit}"
+                    "${String.format("%.2f", it.amount)} ${it.unit}"
                 }
                 productItemFatTv.text = ingredient.nutrients.getFat().let {
-                    "${it.amount} ${it.unit}"
+                    "${String.format("%.2f", it.amount)} ${it.unit}"
                 }
                 productItemCarbsTv.text = ingredient.nutrients.getCarbs().let {
-                    "${it.amount} ${it.unit}"
+                    "${String.format("%.2f", it.amount)} ${it.unit}"
                 }
                 productItemProteinTv.text =
                     ingredient.nutrients.getProtein().let {
-                        "${it.amount} ${it.unit}"
+                        "${String.format("%.2f", it.amount)} ${it.unit}"
                     }
 
                 productItemRemoveBtn.setOnClickListener {

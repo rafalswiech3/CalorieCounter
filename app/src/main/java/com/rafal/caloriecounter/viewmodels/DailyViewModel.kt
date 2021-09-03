@@ -21,9 +21,9 @@ class DailyViewModel @Inject constructor(
     val productsLiveDataArray: Array<LiveData<List<IngredientSearch>>> =
         Array(_productsLiveDataArray.size) { i -> _productsLiveDataArray[i] }
 
-    fun loadProducts(mealID: Int) {
+    fun loadProducts(mealID: Int, date: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val products = repo.loadProducts(mealID)
+            val products = repo.loadProducts(mealID, date)
             _productsLiveDataArray[mealID].postValue(products)
         }
     }

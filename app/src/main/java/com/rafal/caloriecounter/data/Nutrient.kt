@@ -2,6 +2,6 @@ package com.rafal.caloriecounter.data
 
 data class Nutrient(
     val name: String,
-    val amount: Float,
+    var amount: Float,
     val unit: String
 )

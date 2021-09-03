@@ -1,5 +1,6 @@
 package com.rafal.caloriecounter.fragments
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,9 @@ import com.rafal.caloriecounter.databinding.FragmentCalculatorBinding
 import com.rafal.caloriecounter.utilities.BMRCalculatorUtil
 import com.rafal.caloriecounter.viewmodels.CalculatorViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+
+const val BMR_PREF = "BMR"
 
 @AndroidEntryPoint
 class CalculatorFragment : Fragment() {
@@ -20,6 +24,11 @@ class CalculatorFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: CalculatorViewModel by viewModels()
+
+    @Inject
+    lateinit var sharedPrefs: SharedPreferences
+
+    private var calculatedBmr: Float = 0f
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,8 +48,9 @@ class CalculatorFragment : Fragment() {
 
         viewModel.bmrLiveData.observe(viewLifecycleOwner) { bmr ->
             binding.apply {
+                calculatedBmr = bmr.toFloat()
                 calcCalculatedBmrTv.visibility = View.VISIBLE
-                calcCalculatedBmrTv.text = bmr.toFloat().toString() + " ${getString(R.string.kcal)}"
+                calcCalculatedBmrTv.text = calculatedBmr.toString() + " ${getString(R.string.kcal)}"
                 calcYourBmrTv.visibility = View.VISIBLE
                 calcApplyButton.visibility = View.VISIBLE
             }
@@ -48,6 +58,11 @@ class CalculatorFragment : Fragment() {
     }
 
     private val applyButtonClickListener = View.OnClickListener {
+        sharedPrefs.edit().putFloat(BMR_PREF, calculatedBmr).apply()
+        navigateToDailyFragment()
+    }
+
+    private fun navigateToDailyFragment() {
         val action = CalculatorFragmentDirections.actionCalculatorFragmentToDailyFragment()
         findNavController().navigate(action)
     }

@@ -34,10 +34,10 @@ class SearchIngredientPagingAdapter(
                     listener.onItemClick(0, item)
                 }
 
-                itemSearchWeight.text = "${item.amount?.toString()} ${item.unit}"
+                itemSearchWeight.text = "${String.format("%.2f", item.amount)} ${item.unit}"
 
                 itemSearchKcal.text = item.nutrients?.getCalories()?.let {
-                    "${it.amount} ${it.unit}"
+                    "${String.format("%.2f", it.amount)} ${it.unit}"
                 }
             }
         }
